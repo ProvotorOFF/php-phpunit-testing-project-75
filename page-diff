@@ -1,0 +1,16 @@
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use function Downloader\Downloader\downloadPage;
+
+if ($argc < 3) {
+    echo "Usage: page-diff <URL> <output-path>\n";
+    exit(1);
+}
+
+$url = $argv[1];
+$outputPath = $argv[2];
+
+downloadPage($url, $outputPath);
+echo "Page downloaded to $outputPath\n";
