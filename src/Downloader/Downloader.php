@@ -6,6 +6,13 @@ use DiDom\Document;
 use GuzzleHttp\Client;
 use Throwable;
 
+const ASSETS_MAP = [
+    'img' => 'src',
+    'script' => 'src',
+    'link' => 'href'
+];
+
+
 function downloadPage(string $url, string $path = '', string $clientClass = Client::class)
 {
     $client = new $clientClass();
@@ -18,24 +25,26 @@ function downloadPage(string $url, string $path = '', string $clientClass = Clie
 
     $doc = new Document($html);
 
-    foreach ($doc->find('img') as $child) {
-        if (!$child->hasAttribute('src')) continue;
+    foreach (ASSETS_MAP as $asset => $source) {
+        foreach ($doc->find($asset) as $child) {
+            if (!$child->hasAttribute($source)) continue;
 
-        $resourceUrl = $child->getAttribute('src');
-        $absoluteUrl = parse_url($resourceUrl, PHP_URL_SCHEME) ? $resourceUrl : rtrim($url, '/') . '/' . ltrim($resourceUrl, '/');
+            $resourceUrl = $child->getAttribute($source);
+            $absoluteUrl = parse_url($resourceUrl, PHP_URL_SCHEME) ? $resourceUrl : rtrim($url, '/') . '/' . ltrim($resourceUrl, '/');
 
-        $assetName = preg_replace('/[^a-zA-Z0-9]+/', '-', preg_replace('#^https?://#', '', $absoluteUrl));
-        $ext = pathinfo(parse_url($absoluteUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
+            $assetName = preg_replace('/[^a-zA-Z0-9]+/', '-', preg_replace('#^https?://#', '', $absoluteUrl));
+            $ext = pathinfo(parse_url($absoluteUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
 
-        $assetFile = "$assetName.$ext";
-        $assetPath = "$assetsDir/$assetFile";
-        
-        try {
-            $client->request('GET', $absoluteUrl, ['sink' => $assetPath]);
-            $child->setAttribute('src', "{$base}_files/$assetFile");
-        } catch (Throwable $e) {
+            $assetFile = "$assetName.$ext";
+            $assetPath = "$assetsDir/$assetFile";
 
+            try {
+                $client->request('GET', $absoluteUrl, ['sink' => $assetPath]);
+                $child->setAttribute($source, "{$base}_files/$assetFile");
+            } catch (Throwable $e) {
+            }
         }
     }
+
     file_put_contents("$path/$fileName", $doc->html());
 }
