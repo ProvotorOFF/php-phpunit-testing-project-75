@@ -4,6 +4,9 @@ namespace Downloader\Downloader;
 
 use DiDom\Document;
 use GuzzleHttp\Client;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
 use Throwable;
 
 const ASSETS_MAP = [
@@ -15,9 +18,18 @@ const ASSETS_MAP = [
 
 function downloadPage(string $url, string $path = '', string $clientClass = Client::class)
 {
-    $client = new $clientClass();
-    $html = $client->get($url)->getBody()->getContents();
+    $logPath = "$path/logs";
+    $log = new Logger('downloadLog');
     if (!file_exists($path)) mkdir($path, 0777, true);
+    if (!file_exists($logPath)) mkdir($logPath, 0777, true);
+    $log->pushHandler(new StreamHandler("$logPath/error.log", Level::Error));
+    /** @var Client $client */
+    $client = new $clientClass();
+    try {
+        $html = $client->get($url)->getBody()->getContents();
+    } catch (Throwable $e) {
+        $log->error($e->getMessage());
+    }
     $base = preg_replace('/[^a-zA-Z0-9]+/', '-', preg_replace('#^https?://#', '', $url));
     $fileName =  "$base.html";
     $assetsDir = "$path/{$base}_files";
@@ -42,6 +54,7 @@ function downloadPage(string $url, string $path = '', string $clientClass = Clie
                 $client->request('GET', $absoluteUrl, ['sink' => $assetPath]);
                 $child->setAttribute($source, "{$base}_files/$assetFile");
             } catch (Throwable $e) {
+                $log->error($e->getMessage());
             }
         }
     }

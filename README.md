@@ -19,3 +19,11 @@ composer install
 php page-diff <URL> <output-path>
 ```
 
+### Логирование
+В проекте настроено логирование ошибок, после загрузки страницы будет создана папка logs в текущем проекте.
+
+Пример лога
+```log
+[2025-03-01T20:22:55.014623+03:00] downloadLog.ERROR: Unable to open "D:\OSPanel6\home\unit-project/output/facts-sovmaths-ru_files/mc-yandex-ru-watch-99400651." using mode "w+": fopen(D:\OSPanel6\home\unit-project/output/facts-sovmaths-ru_files/mc-yandex-ru-watch-99400651.): Failed to open stream: Permission denied [] []
+
+```

@@ -19,7 +19,8 @@
     ],
     "require": {
         "guzzlehttp/guzzle": "^7.9",
-        "imangazaliev/didom": "^2.0"
+        "imangazaliev/didom": "^2.0",
+        "monolog/monolog": "^3.8"
     },
     "require-dev": {
         "phpunit/phpunit": "^12.0"
