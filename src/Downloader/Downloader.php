@@ -29,6 +29,7 @@ function downloadPage(string $url, string $path = '', string $clientClass = Clie
         $html = $client->get($url)->getBody()->getContents();
     } catch (Throwable $e) {
         $log->error($e->getMessage());
+        throw $e;
     }
     $base = preg_replace('/[^a-zA-Z0-9]+/', '-', preg_replace('#^https?://#', '', $url));
     $fileName =  "$base.html";
@@ -49,7 +50,6 @@ function downloadPage(string $url, string $path = '', string $clientClass = Clie
 
             $assetFile = "$assetName.$ext";
             $assetPath = "$assetsDir/$assetFile";
-
             try {
                 $client->request('GET', $absoluteUrl, ['sink' => $assetPath]);
                 $child->setAttribute($source, "{$base}_files/$assetFile");

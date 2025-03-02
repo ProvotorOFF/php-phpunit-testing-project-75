@@ -7,4 +7,4 @@ use Tests\FakeClient\FakeClient;
 
 use function Downloader\Downloader\downloadPage;
 
-downloadPage('https://facts.sovmaths.ru', __DIR__ . '/output', Client::class);
+downloadPage('bad.url', __DIR__ . '/output', FakeClient::class);
