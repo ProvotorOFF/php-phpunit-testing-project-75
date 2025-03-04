@@ -52,10 +52,11 @@ function downloadPage(string $url, string $path = '', string $clientClass = Clie
             $assetPath = "$assetsDir/$assetFile";
             try {
                 $client->request('GET', $absoluteUrl, ['sink' => $assetPath]);
-                $child->setAttribute($source, "{$base}_files/$assetFile");
             } catch (Throwable $e) {
                 $log->error($e->getMessage());
             //throw $e;
+            } finally {
+                $child->setAttribute($source, "{$base}_files/$assetFile");
             }
         }
     }
