@@ -55,7 +55,7 @@ function downloadPage(string $url, string $path = '', string $clientClass = Clie
                 $child->setAttribute($source, "{$base}_files/$assetFile");
             } catch (Throwable $e) {
                 $log->error($e->getMessage());
-                throw $e;
+            //throw $e;
             }
         }
     }
