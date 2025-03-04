@@ -69,10 +69,10 @@ class DownloaderTest extends TestCase
         downloadPage('bad.url', static::OUTPUT_PATH, FakeClient::class);
     }
 
-    // protected function tearDown(): void
-    // {
-    //     $this->deleteDir(self::OUTPUT_PATH);
-    // }
+    protected function tearDown(): void
+    {
+        $this->deleteDir(self::OUTPUT_PATH);
+    }
 
     protected function deleteDir($dirPath)
     {
