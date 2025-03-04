@@ -45,7 +45,7 @@ function downloadPage(string $url, string $path = '', string $clientClass = Clie
             $resourceUrl = $child->getAttribute($source);
             $absoluteUrl = parse_url($resourceUrl, PHP_URL_SCHEME) ? $resourceUrl : rtrim($url, '/') . '/' . ltrim($resourceUrl, '/');
 
-            $assetFile = preg_replace('/-(?=[^.-]*$)/', '.', preg_replace('/[^a-zA-Z0-9]+/', '-', preg_replace('#^https?://#', '', $url . parse_url($resourceUrl, PHP_URL_PATH))));
+            $assetFile = preg_replace('/-(?=[^.-]*$)/', '.', preg_replace('/[^a-zA-Z0-9]+/', '-',  preg_replace('#^https?://#', '', parse_url($url, PHP_URL_HOST) . parse_url($resourceUrl, PHP_URL_PATH))));
             $assetPath = "$assetsDir/$assetFile";
             try {
                 $client->request('GET', $absoluteUrl, ['sink' => $assetPath]);
