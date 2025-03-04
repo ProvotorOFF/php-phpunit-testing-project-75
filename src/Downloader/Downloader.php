@@ -43,6 +43,9 @@ function downloadPage(string $url, string $path = '', string $clientClass = Clie
             if (!$child->hasAttribute($source)) continue;
 
             $resourceUrl = $child->getAttribute($source);
+            if (!str_contains($resourceUrl, '.')) {
+                $resourceUrl .= '.html';
+            }
             $absoluteUrl = parse_url($resourceUrl, PHP_URL_SCHEME) ? $resourceUrl : rtrim($url, '/') . '/' . ltrim($resourceUrl, '/');
 
             $parsedUrl = parse_url($resourceUrl);
