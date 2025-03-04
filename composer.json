@@ -6,7 +6,9 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "src/Downloader/Downloader.php"
+            "src/Downloader/Downloader.php",
+            "src/Downloader/PL.php",
+            "src/Downloader/Connection.php"
         ]
     },
     "bin": [
