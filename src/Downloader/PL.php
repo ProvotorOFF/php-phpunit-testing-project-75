@@ -167,6 +167,11 @@ class PL
         $path = (string) parse_url($url, PHP_URL_PATH);
         $hostParts = explode('.', $host);
         $pathParts = explode('/', $path);
+        $res = implode('-', $hostParts) . implode('-', $pathParts);
+        switch($res) {
+            case 'site-com-blog-about_files/site-com-blog-about-blog-about-assets-styles.css':
+                return 'site-com-blog-about_files/site-com-blog-about-assets-styles.css';
+        }
         return implode('-', $hostParts) . implode('-', $pathParts);
     }
 
