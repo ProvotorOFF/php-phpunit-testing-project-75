@@ -19,7 +19,7 @@ if (!function_exists('Downloader\Downloader\downloadPage')) {
 
         $targetDir = $targetPath ?? getcwd();
 
-        $clientClass = !empty($clientClass) ? $clientClass : new Client();
+        $clientClass = !empty($clientClass) ? new $clientClass : new Client();
         $params = ['url' => $url, 'path' => $targetDir, 'client' => $clientClass];
         $loader = new Loader($params);
 
