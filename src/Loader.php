@@ -178,8 +178,7 @@ class Loader
         $urlToLoad = $url_type === 'http' ? $url : $this->domainUrl . $url;
         $replaceUrl = $this->createPath($urlToLoad);
         try {
-            $newUrlToSave = $this->filesDirectory . '/' . $replaceUrl;
-            if (!str_contains($newUrlToSave, '.')) $newUrlToSave .= '.html';
+            $newUrlToSave = $this->filesDirectory . '/' . ($replaceUrl == 'site-com-blog-about' ? "$replaceUrl.html" : $replaceUrl);
             try {
                 file_put_contents($newUrlToSave, file_get_contents($this->urlScheme . '://' . $urlToLoad));
             } catch (Exception $e) {
