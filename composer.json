@@ -24,7 +24,8 @@
     },
     "authors": [
         {
-
+            "name": "Andrei Provotorov",
+            "email": "provotor.an@egmail.com"
         }
     ],
     "minimum-stability": "stable"
