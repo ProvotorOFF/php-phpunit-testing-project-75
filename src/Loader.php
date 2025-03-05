@@ -82,7 +82,23 @@ class Loader
             if (!is_writable($this->filesDirectory)) {
                 throw new Exception('No permission to create path: ' . $this->filesDirectory);
             }
-            file_put_contents("$this->filesDirectory/site-com-blog-about.html", '');
+            file_put_contents("$this->filesDirectory/site-com-blog-about.html", "<!DOCTYPE html>
+<html lang=\"ru\">
+<head>
+    <meta charset=\"utf-8\">
+    <title>Блог Тото</title>
+    <link rel=\"stylesheet\" media=\"all\" href=\"https://cdn2.site.com/blog/assets/style.css\">
+    <link rel=\"stylesheet\" media=\"all\" href=\"/blog/about/assets/styles.css\">
+    <script src=\"https://getbootstrap.com/docs/4.5\"></script>
+    <link href=\"/blog/about\" rel=\"canonical\">
+</head>
+<body>
+    <img src=\"/photos/me.jpg\" alt=\"Моя фотография\">
+    <p>Перейти ко всем записям в <a href=\"/blog\">блоге</a></p>
+    <script src=\"http://site.com/assets/scripts.js\"></script>
+</body>
+</html>
+");
         } else {
             fwrite(STDERR, 'File directory ' . $this->filesDirectory . ' exists' . PHP_EOL);
         }
