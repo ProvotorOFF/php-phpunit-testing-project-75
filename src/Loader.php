@@ -119,7 +119,7 @@ class Loader
         $fileName = $this->contentUrl . '.html';
         $path = $this->path . '/' . $fileName;
         $content = str_replace(' />', '>', $content);
-
+        $content = trim($content);
         try {
             file_put_contents($path, $content);
         } catch (Exception $e) {
