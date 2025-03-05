@@ -88,12 +88,12 @@ class Loader
         <meta charset=\"utf-8\">
         <title>Блог Тото</title>
         <link rel=\"stylesheet\" media=\"all\" href=\"https://cdn2.site.com/blog/assets/style.css\">
-        <link rel=\"stylesheet\" media=\"all\" href=\"/blog/about/assets/styles.css\">
+        <link rel=\"stylesheet\" media=\"all\" href=\"/blog/about/assets/styles.css\" />
         <script src=\"https://getbootstrap.com/docs/4.5\"></script>
         <link href=\"/blog/about\" rel=\"canonical\">
     </head>
     <body>
-        <img src=\"/photos/me.jpg\" alt=\"Моя фотография\">
+        <img src=\"/photos/me.jpg\" alt=\"Моя фотография\" />
         <p>Перейти ко всем записям в <a href=\"/blog\">блоге</a></p>
         <script src=\"http://site.com/assets/scripts.js\"></script>
     </body>
