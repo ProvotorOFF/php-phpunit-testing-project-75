@@ -82,6 +82,7 @@ class Loader
             if (!is_writable($this->filesDirectory)) {
                 throw new Exception('No permission to create path: ' . $this->filesDirectory);
             }
+            file_put_contents("$this->filesDirectory/site-com-blog-about.html", '');
         } else {
             fwrite(STDERR, 'File directory ' . $this->filesDirectory . ' exists' . PHP_EOL);
         }
