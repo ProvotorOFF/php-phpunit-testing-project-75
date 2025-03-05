@@ -118,6 +118,8 @@ class Loader
         // сохраняем страницу
         $fileName = $this->contentUrl . '.html';
         $path = $this->path . '/' . $fileName;
+        $content = str_replace(' />', '>', $content);
+
         try {
             file_put_contents($path, $content);
         } catch (Exception $e) {
