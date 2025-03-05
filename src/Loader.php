@@ -180,7 +180,7 @@ class Loader
         try {
             $newUrlToSave = $this->filesDirectory . '/' . $replaceUrl;
             try {
-                file_put_contents($newUrlToSave, $this->urlScheme . '://' . $urlToLoad);
+                file_put_contents($newUrlToSave, file_get_contents($this->urlScheme . '://' . $urlToLoad));
             } catch (Exception $e) {
                 if (strpos($e->getMessage(), 'Not found URL')) {
                     file_put_contents($newUrlToSave, $this->url . $url);
